@@ -1,33 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Portfolio</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;      /* Centrerar alla bilder horisontellt */
-      background-color: #fff;
-    }
-    img {
-      max-width: 70%;           /* Bilderna får plats på olika skärmstorlekar */
-      margin: 20px 0;           /* Lite luft mellan bilder */
-      height: auto;
-      border: 1px solid #ccc;   /* Kan tas bort om du inte vill ha ram */
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Noel Ekbrand — Robotics & Automation Engineer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <img src="Portfolio_Noel_Ekrband_2026-1.png" alt="Portfolio Page 1">
-  <img src="Portfolio_Noel_Ekrband_2026-2.png" alt="Portfolio Page 2">
-  <img src="Portfolio_Noel_Ekrband_2026-3.png" alt="Portfolio Page 3">
-  <img src="Portfolio_Noel_Ekrband_2026-4.png" alt="Portfolio Page 4">
-  <img src="Portfolio_Noel_Ekrband_2026-5.png" alt="Portfolio Page 5">
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-content">
+        <h1>Noel Ekbrand</h1>
+        <h2>Robotics & Automation Engineer</h2>
+        <p class="hero-sub">
+		    <span>M.Sc. Mechanical Engineering – Mechatronics</span>
+		    <span>Building intelligent robotic systems and embedded solutions.</span>
+        </p>
+
+        <div class="hero-links">
+            <a href="mailto:noel.ekbrand@gmail.com">Email</a>
+            <a href="https://linkedin.com/in/noel-ekbrand-6000582b3" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main>
+
+<!-- ABOUT -->
+<section class="section">
+    <div class="container">
+        <h3 class="section-title">About</h3>
+        <p class="section-text">
+            I focus on robotics, motion planning, embedded control systems,
+            and system-level automation. My work combines algorithm design,
+            industrial simulation, and hardware integration to build robust,
+            safe, and production-ready engineering solutions.
+        </p>
+    </div>
+</section>
+
+<!-- THESIS -->
+<section class="section alt">
+    <div class="container">
+        <h3 class="section-title">Master’s Thesis — Alfa Laval</h3>
+
+        <div class="project-grid">
+
+            <div class="project-image">
+                <!-- Replace filename only -->
+                <img src="Images/LabStation_Obstacles.png" alt="Thesis project image">
+            </div>
+
+            <div class="project-content">
+                <h4>Robotic Motion Planning & Safe Homing</h4>
+
+                <p>
+                    Development of a RobotStudio Add-in enabling automated,
+                    collision-free homing and recovery of industrial robots
+                    after interruptions in complex environments.
+                </p>
+
+                <ul class="tech-list">
+                    <li>C# RobotStudio Add-in</li>
+                    <li>RRT-Connect & A*</li>
+                    <li>Joint-space & TCP planning</li>
+                    <li>Python environment preprocessing</li>
+                    <li>Joint-space TSP solver</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section">
+    <div class="container">
+        <h3 class="section-title">Selected Projects</h3>
+
+        <div class="cards">
+
+            <!-- PROJECT 1 -->
+            <div class="card">
+                <img src="Images/Embedded_Servo.jpg" alt="Embedded servo system">
+                <div class="card-body">
+                    <h4>Embedded Servo Control System</h4>
+                    <p>
+                        Custom PCB and microcontroller-based DC motor control
+                        system with speed regulation and computer interface.
+                    </p>
+                    <div class="tag-row">
+                        <span>C</span>
+                        <span>Motor Control</span>
+                        <span>PCB</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 2 -->
+            <div class="card">
+                <img src="Images/Robot_Maze.png" alt="Rescue robot">
+                <div class="card-body">
+                    <h4>Autonomous Rescue Robot</h4>
+                    <p>
+                        Arduino-based robot navigating a maze using PID
+                        control and a custom-built object retrieval gripper.
+                    </p>
+                    <div class="tag-row">
+                        <span>Arduino</span>
+                        <span>PID</span>
+                        <span>Autonomy</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 3 -->
+            <div class="card">
+                <img src="Images/Electrical_Motor.png" alt="Motor prototype">
+                <div class="card-body">
+                    <h4>Electric Motor Educational Prototype</h4>
+                    <p>
+                        Modular 3D-printed motor platform designed for
+                        interactive electromechanical demonstrations.
+                    </p>
+                    <div class="tag-row">
+                        <span>3D Printing</span>
+                        <span>Electromechanics</span>
+                        <span>Arduino</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section alt">
+    <div class="container center">
+        <h3 class="section-title">Contact</h3>
+        <p class="section-text">
+            Based in Gothenburg, Sweden<br>
+            Open to Robotics & Automation Roles
+        </p>
+        <a class="primary-button" href="mailto:noel.ekbrand@gmail.com">
+            Get In Touch
+        </a>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    © 2026 Noel Ekbrand — Robotics & Automation Engineer
+</footer>
 
 </body>
 </html>
-
