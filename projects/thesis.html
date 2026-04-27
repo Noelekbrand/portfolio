@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Coming Soon — Noel Ekbrand</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #7dd3fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 40px 40px 0;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 0.7; }
+
+        .upcoming-wrap {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+        }
+        .upcoming-inner {
+            max-width: 560px;
+            text-align: center;
+        }
+
+        /* Animated dots indicator */
+        .upcoming-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 20px;
+            background: #111827;
+            border: 1px solid #1f2937;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            gap: 7px;
+        }
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1D9E75;
+            animation: pulse 1.4s ease-in-out infinite;
+        }
+        .dot:nth-child(2) { animation-delay: 0.2s; background: #7dd3fc; }
+        .dot:nth-child(3) { animation-delay: 0.4s; background: #2d3748; }
+        @keyframes pulse {
+            0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .upcoming-eyebrow {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #1D9E75;
+            margin-bottom: 16px;
+        }
+        .upcoming-inner h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .upcoming-inner p {
+            color: #9ca3af;
+            font-size: 1rem;
+            line-height: 1.75;
+            margin-bottom: 40px;
+        }
+
+        /* Project name slot — edit this per page */
+        .project-name {
+            display: inline-block;
+            background: #111827;
+            border: 1px solid #2d3748;
+            border-radius: 10px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #e6edf3;
+            margin-bottom: 40px;
+            font-family: "SF Mono", "Fira Code", monospace;
+        }
+        .project-name span {
+            color: #7dd3fc;
+        }
+
+        .upcoming-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .upcoming-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 11px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-ghost {
+            background: transparent;
+            color: #9ca3af;
+            border: 1px solid #2d3748;
+        }
+        .btn-ghost:hover { background: #1f2937; color: #e6edf3; }
+
+        @media (max-width: 600px) {
+            .back-link { padding: 24px 20px 0; }
+            .upcoming-wrap { padding: 40px 20px; }
+            .upcoming-inner h1 { font-size: 1.7rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+<a href="../index.html" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to portfolio
+</a>
+
+<div class="upcoming-wrap">
+    <div class="upcoming-inner">
+
+        <div class="upcoming-icon">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+
+        <p class="upcoming-eyebrow">Work in progress</p>
+
+        <!-- ↓ Change this title per project ↓ -->
+        <h1>Master's thesis — Alfa Laval Coming soon</h1>
+
+        <!-- ↓ Change this to the project name ↓ -->
+        <div class="project-name">
+            <span>//</span> Robotic Motion Planning &amp; Safe Homing
+        </div>
+
+        <p>
+            This page is still being written.<br>
+            Check back soon or have a look at the rest of the portfolio.
+        </p>
+
+        <div class="upcoming-links">
+            <a href="../index.html" class="btn-ghost">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Back to portfolio
+            </a>
+            <a href="https://github.com/Noelekbrand?tab=repositories" target="_blank" class="btn-ghost">
+                GitHub
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 Noel Ekbrand — Robotics &amp; Automation Engineer
+</footer>
+
+</body>
+</html>

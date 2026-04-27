@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HIL PWM Control System — Noel Ekbrand</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* ── PROJECT PAGE EXTRAS ── */
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #7dd3fc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 40px 40px 0;
+            transition: opacity 0.2s;
+        }
+        .back-link:hover { opacity: 0.7; }
+
+        /* ── HERO ── */
+        .project-hero {
+            padding: 48px 40px 60px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .project-hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .eyebrow-badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: #1D9E75;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+        .eyebrow-year {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+        .project-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.15;
+            max-width: 780px;
+            margin-bottom: 20px;
+        }
+        .project-hero .lead {
+            font-size: 1.1rem;
+            color: #9ca3af;
+            max-width: 680px;
+            line-height: 1.75;
+            margin-bottom: 32px;
+        }
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag-row span {
+            display: inline-block;
+            background: #1f2937;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #7dd3fc;
+            border: 1px solid #2d3748;
+        }
+
+        /* ── HERO IMAGE ── */
+        .hero-image-wrap {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+        }
+        .hero-image-wrap img {
+            width: 100%;
+            max-height: 600px;
+            object-fit: cover;
+            border-radius: 16px;
+            display: block;
+        }
+        .image-caption {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 10px;
+        }
+
+        /* ── CONTENT SECTIONS ── */
+        .project-section {
+            padding: 64px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .project-section + .project-section {
+            border-top: 1px solid #1f2937;
+        }
+        .project-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #e6edf3;
+        }
+        .project-section p {
+            color: #9ca3af;
+            line-height: 1.8;
+            max-width: 720px;
+            margin-bottom: 16px;
+        }
+
+        /* ── TWO-COL LAYOUT ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        .two-col-text h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* ── SPEC LIST ── */
+        .spec-block {
+            background: #111827;
+            border-radius: 14px;
+            padding: 28px 32px;
+            margin-top: 0;
+        }
+        .spec-block h3 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #7dd3fc;
+            margin-bottom: 16px;
+        }
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px;
+        }
+        .spec-list li {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            padding: 7px 0;
+            border-bottom: 1px solid #1f2937;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }
+        .spec-list li:last-child { border-bottom: none; }
+        .spec-list li::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #1D9E75;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ── DIAGRAM ── */
+        .diagram-wrap {
+            background: #0b0f17;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 24px;
+        }
+        .diagram-wrap svg {
+            width: 100%;
+            height: auto;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 32px 0;
+        }
+        .stat-card {
+            background: #111827;
+            border-radius: 14px;
+            padding: 24px;
+            text-align: center;
+        }
+        .stat-card .stat-number {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #7dd3fc;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+        .stat-card .stat-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        /* ── IMAGE GRID ── */
+        .img-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .img-grid-2 img {
+            width: 100%;
+            border-radius: 14px;
+        }
+
+        /* ── CODE BLOCK ── */
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+        .code-block pre {
+            margin: 0;
+            font-family: "SF Mono", "Fira Code", "Cascadia Code", monospace;
+            font-size: 0.82rem;
+            color: #e6edf3;
+            line-height: 1.7;
+            white-space: pre;
+        }
+        .code-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+        .kw { color: #ff7b72; }
+        .fn { color: #d2a8ff; }
+        .str { color: #a5d6ff; }
+        .cmt { color: #6b7280; }
+        .num { color: #79c0ff; }
+
+        /* ── VIDEO PLACEHOLDER ── */
+        .media-placeholder {
+            background: #111827;
+            border: 2px dashed #2d3748;
+            border-radius: 14px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 24px;
+        }
+        .media-placeholder .ph-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            opacity: 0.4;
+        }
+        .media-placeholder p {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin: 0;
+            max-width: 100%;
+        }
+        .media-placeholder .ph-hint {
+            font-size: 0.78rem;
+            color: #4b5563;
+            margin-top: 6px;
+        }
+
+        /* ── LINKS ── */
+        .project-links {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+        .project-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #7dd3fc;
+            color: #0b0f17;
+        }
+        .btn-primary:hover { background: #38bdf8; }
+        .btn-secondary {
+            background: transparent;
+            color: #7dd3fc;
+            border: 1px solid #2d3748;
+        }
+        .btn-secondary:hover { background: #1f2937; }
+
+        /* ── STATE MACHINE DIAGRAM (CSS) ── */
+        .state-machine {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: wrap;
+            margin-top: 24px;
+            padding: 32px 0;
+        }
+        .state-node {
+            background: #111827;
+            border: 1.5px solid #2d3748;
+            border-radius: 50px;
+            padding: 10px 22px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e6edf3;
+            white-space: nowrap;
+        }
+        .state-node.active { border-color: #1D9E75; color: #7dd3fc; }
+        .state-node.error { border-color: #dc2626; color: #fca5a5; }
+        .state-arrow {
+            color: #4b5563;
+            font-size: 1.2rem;
+            padding: 0 8px;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .project-hero h1 { font-size: 2rem; }
+            .two-col { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+            .img-grid-2 { grid-template-columns: 1fr; }
+            .back-link, .project-hero, .hero-image-wrap, .project-section { padding-left: 20px; padding-right: 20px; }
+        }
+        @media (max-width: 600px) {
+            .stats-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- BACK -->
+<a href="../index.html" class="back-link">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M10 3L5 8L10 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to portfolio
+</a>
+
+<!-- HERO TEXT -->
+<div class="project-hero">
+    <div class="project-hero-eyebrow">
+        <span class="eyebrow-badge">Personal project</span>
+        <span class="eyebrow-year">2025</span>
+    </div>
+    <h1>Arduino Leonardo PWM Controller with Raspberry Pi HIL Testing</h1>
+    <p class="lead">
+        A complete Hardware-in-the-Loop validation platform: an embedded PWM controller with a four-state firmware
+        running on an Arduino Leonardo, tested automatically by a Raspberry Pi acting as test master — 61 test cases, all passing.
+    </p>
+    <div class="tag-row">
+        <span>Hardware in the Loop</span>
+        <span>Arduino / C</span>
+        <span>Python 3</span>
+        <span>ATmega32U4</span>
+        <span>Raspberry Pi 3</span>
+        <span>UART Protocol</span>
+        <span>State Machine</span>
+        <span>PWM</span>
+    </div>
+</div>
+
+<!-- HERO IMAGE — replace with a clean photo of your hardware setup -->
+<div class="hero-image-wrap">
+    <!-- When ready, swap the placeholder above for: -->
+    <!-- <img src="../Images/hardware-setup.jpg" alt="HIL hardware setup: Arduino Leonardo, breadboard with LEDs, and Raspberry Pi 3"> -->
+    <img src="../Images/IMG_0309.png" alt="HIL hardware setup: Arduino Leonardo, breadboard with LEDs, and Raspberry Pi 3">
+    <p class="image-caption">Hardware setup — Arduino Leonardo + breadboard + Raspberry Pi 3</p>
+</div>
+
+<!-- STATS -->
+<div class="project-section" style="padding-top: 0;">
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-number">61</div>
+            <div class="stat-label">Automated test cases</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Pass rate</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Independent PWM channels</div>
+        </div>
+    </div>
+</div>
+
+<!-- OVERVIEW + SPECS -->
+<div class="project-section">
+    <div class="two-col">
+        <div class="two-col-text">
+            <h2>Overview</h2>
+            <p>
+                The goal was to build a realistic HIL setup — the kind of workflow used in automotive and
+                industrial automation — on accessible hardware. An Arduino Leonardo runs embedded firmware
+                with a proper state machine, communicates over UART, and controls three LEDs via PWM with
+                smooth brightness ramping.
+            </p>
+            <p>
+                A Raspberry Pi 3 acts as the external test master. It sends commands, reads ACK/NACK
+                responses, polls for state transitions, and runs a full automated test suite in Python.
+                No manual intervention needed.
+            </p>
+        </div>
+        <div>
+            <div class="spec-block">
+                <h3>Arduino Leonardo</h3>
+                <ul class="spec-list">
+                    <li>ATmega32U4 microcontroller</li>
+                    <li>3 PWM channels — pins 9, 10, 11</li>
+                    <li>2 red LEDs + 1 green LED, 330Ω resistors</li>
+                    <li>Soft brightness ramping in firmware</li>
+                    <li>millis() based non-blocking timer</li>
+                    <li>UART at 9600 baud</li>
+                </ul>
+                <h3>Raspberry Pi 3</h3>
+                <ul class="spec-list">
+                    <li>Host and HIL test master</li>
+                    <li>controller.py — communication library</li>
+                    <li>test_controller.py — 61 test cases</li>
+                    <li>CLI: python3 controller.py SET_RED1 75</li>
+                    <li>Connected via USB serial</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- STATE MACHINE -->
+<div class="project-section">
+    <h2>Firmware state machine</h2>
+    <p>
+        The firmware is structured as a deterministic four-state machine. Each state has clearly defined
+        entry conditions, exit conditions, and allowed commands — making behavior predictable and testable.
+    </p>
+
+    <div class="state-machine">
+        <div class="state-node active">IDLE</div>
+        <div class="state-arrow">→</div>
+        <div class="state-node active">RAMPING</div>
+        <div class="state-arrow">→</div>
+        <div class="state-node active">STEADY</div>
+        <div class="state-arrow">⇄</div>
+        <div class="state-node error">ERROR</div>
+    </div>
+
+    <div class="spec-block" style="margin-top: 20px;">
+        <ul class="spec-list">
+            <li><strong style="color:#e6edf3; min-width: 80px; display:inline-block;">IDLE</strong> Waiting for commands. All PWM outputs off.</li>
+            <li><strong style="color:#e6edf3; min-width: 80px; display:inline-block;">RAMPING</strong> Actively transitioning to a new brightness target.</li>
+            <li><strong style="color:#e6edf3; min-width: 80px; display:inline-block;">STEADY</strong> Target brightness reached. Holding or running sequence.</li>
+            <li><strong style="color:#e6edf3; min-width: 80px; display:inline-block;">ERROR</strong> Invalid command or out-of-range value received. Responds with NACK.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- COMMAND PROTOCOL + CODE -->
+<div class="project-section">
+    <h2>UART command protocol</h2>
+    <p>
+        Commands are sent as plain-text strings over serial. The firmware parses each line, validates
+        the argument range, updates internal state, and responds with ACK or NACK.
+    </p>
+
+    <div class="code-block">
+        <div class="code-label">Available commands</div>
+        <pre>
+<span class="cmt"># Set individual channel brightness (0–255)</span>
+SET_RED1 &lt;value&gt;      <span class="cmt">→ ACK or NACK</span>
+SET_RED2 &lt;value&gt;      <span class="cmt">→ ACK or NACK</span>
+SET_GREEN &lt;value&gt;     <span class="cmt">→ ACK or NACK</span>
+
+<span class="cmt"># Global brightness multiplier</span>
+SET_BRIGHTNESS &lt;value&gt;
+
+<span class="cmt"># Autonomous traffic light sequence</span>
+SEQUENCE START
+SEQUENCE STOP
+
+<span class="cmt"># Query current state</span>
+STATUS               <span class="cmt">→ STATE:IDLE | RAMPING | STEADY | ERROR</span></pre>
+    </div>
+
+    <div class="code-block" style="margin-top: 16px;">
+        <div class="code-label">Python — controller.py example</div>
+        <pre>
+<span class="cmt"># Run a command from the CLI</span>
+$ python3 controller.py SET_RED1 <span class="num">75</span>
+<span class="str">ACK</span>
+
+<span class="cmt"># Or use the library in test code</span>
+<span class="kw">from</span> controller <span class="kw">import</span> open_port, send_command, poll_until_steady
+
+port = open_port(<span class="str">"/dev/ttyACM0"</span>)
+send_command(port, <span class="str">"SET_GREEN"</span>, <span class="num">200</span>)
+poll_until_steady(port)</pre>
+    </div>
+</div>
+
+<!-- SYSTEM DIAGRAM -->
+<div class="project-section">
+    <h2>System diagram</h2>
+    <p>
+        The full software and hardware stack — from the Python test suite on the Pi down to the PWM
+        pins driving each LED on the breadboard.
+    </p>
+    <div class="diagram-wrap">
+        <!-- HIL system diagram SVG -->
+        <svg width="100%" viewBox="0 0 680 580" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>HIL System Diagram: Arduino Leonardo PWM Controller</title>
+<desc>System diagram showing Raspberry Pi 3 as host connected via USB to Arduino Leonardo, which controls three LEDs on a breadboard.</desc>
+<defs>
+  <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </marker>
+<mask id="imagine-text-gaps-uf56d5" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="680" height="580" fill="white"/><rect x="108.140625" y="52" width="104.80091857910156" height="22" fill="black" rx="2"/><rect x="105.6875" y="72" width="109.78985595703125" height="19" fill="black" rx="2"/><rect x="95.9453125" y="110" width="127.96287536621094" height="22" fill="black" rx="2"/><rect x="90.96875" y="130" width="137.89584350585938" height="19" fill="black" rx="2"/><rect x="112.8984375" y="178" width="94.06890869140625" height="22" fill="black" rx="2"/><rect x="90.75" y="198" width="138.64981079101562" height="19" fill="black" rx="2"/><rect x="129.78125" y="242" width="60.810943603515625" height="22" fill="black" rx="2"/><rect x="88.0234375" y="260" width="143.70181274414062" height="19" fill="black" rx="2"/><rect x="304.171875" y="248" width="32.77398681640625" height="19" fill="black" rx="2"/><rect x="286.546875" y="286" width="65.90625" height="19" fill="black" rx="2"/><rect x="281.515625" y="301" width="77.28594970703125" height="19" fill="black" rx="2"/><rect x="293.6328125" y="316" width="52.663970947265625" height="19" fill="black" rx="2"/><rect x="280.0859375" y="200" width="79.59591674804688" height="19" fill="black" rx="2"/><rect x="415.15625" y="52" width="129.4678955078125" height="22" fill="black" rx="2"/><rect x="410.3828125" y="72" width="139.17987060546875" height="19" fill="black" rx="2"/><rect x="434.21875" y="106" width="92.804931640625" height="22" fill="black" rx="2"/><rect x="420.09375" y="124" width="119.6478271484375" height="19" fill="black" rx="2"/><rect x="416.140625" y="168" width="127.8018798828125" height="22" fill="black" rx="2"/><rect x="426.1953125" y="186" width="108.05389404296875" height="19" fill="black" rx="2"/><rect x="420.125" y="201" width="119.555908203125" height="19" fill="black" rx="2"/><rect x="433.59375" y="242" width="93.81292724609375" height="22" fill="black" rx="2"/><rect x="420.6328125" y="260" width="119.67578125" height="19" fill="black" rx="2"/><rect x="276.609375" y="410" width="87.0069580078125" height="22" fill="black" rx="2"/><rect x="253.59375" y="430" width="132.63983154296875" height="19" fill="black" rx="2"/><rect x="118.6875" y="466" width="42.625" height="22" fill="black" rx="2"/><rect x="98.6328125" y="484" width="83.46189880371094" height="19" fill="black" rx="2"/><rect x="297.28125" y="466" width="46.21099853515625" height="22" fill="black" rx="2"/><rect x="276.1953125" y="484" width="88.33990478515625" height="19" fill="black" rx="2"/><rect x="474.1171875" y="466" width="51.28497314453125" height="22" fill="black" rx="2"/><rect x="457.59375" y="484" width="85.54388427734375" height="19" fill="black" rx="2"/><rect x="141.0546875" y="340" width="36.98399353027344" height="19" fill="black" rx="2"/><rect x="614.75" y="180" width="46.8619384765625" height="19" fill="black" rx="2"/><rect x="621.5625" y="196" width="33.84796142578125" height="19" fill="black" rx="2"/><rect x="605.3359375" y="212" width="65.3779296875" height="19" fill="black" rx="2"/></mask></defs>
+<g>
+  <rect x="40" y="40" width="240" height="300" rx="14" stroke-width="0.5" style="fill:rgb(8, 80, 65);stroke:rgb(93, 202, 165);stroke-width:0.5px;"/>
+  <text x="160" y="68" text-anchor="middle" style="fill:rgb(159, 225, 203);font-size:14px;font-weight:500;">Raspberry Pi 3</text>
+  <text x="160" y="86" text-anchor="middle" style="fill:rgb(93, 202, 165);font-size:12px;">Host / test master</text>
+</g>
+<g>
+  <rect x="60" y="104" width="200" height="52" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);stroke-width:0.5px;"/>
+  <text x="160" y="126" text-anchor="middle" style="fill:rgb(211, 209, 199);font-size:14px;font-weight:500;">test_controller.py</text>
+  <text x="160" y="144" text-anchor="middle" style="fill:rgb(180, 178, 169);font-size:12px;">61 automated HIL tests</text>
+</g>
+<g>
+  <rect x="60" y="172" width="200" height="52" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);stroke-width:0.5px;"/>
+  <text x="160" y="194" text-anchor="middle" style="fill:rgb(211, 209, 199);font-size:14px;font-weight:500;">controller.py</text>
+  <text x="160" y="212" text-anchor="middle" style="fill:rgb(180, 178, 169);font-size:12px;">Serial comm library</text>
+</g>
+<g>
+  <rect x="60" y="240" width="200" height="52" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);stroke-width:0.5px;"/>
+  <text x="160" y="262" text-anchor="middle" style="fill:rgb(211, 209, 199);font-size:14px;font-weight:500;">USB Serial</text>
+  <text x="160" y="278" text-anchor="middle" style="fill:rgb(180, 178, 169);font-size:12px;">9600 baud, ACK/NACK</text>
+</g>
+<!-- USB arrow -->
+<line x1="280" y1="200" x2="380" y2="200" stroke="#378ADD" stroke-width="2" marker-end="url(#arrow)" marker-start="url(#arrow)" style="stroke:#378ADD;"/>
+<text x="320" y="193" text-anchor="middle" style="fill:rgb(53, 138, 221);font-size:11px;">USB</text>
+<!-- Arduino -->
+<g>
+  <rect x="380" y="40" width="240" height="300" rx="14" stroke-width="0.5" style="fill:rgb(12, 68, 124);stroke:rgb(55, 138, 221);stroke-width:0.5px;"/>
+  <text x="500" y="68" text-anchor="middle" style="fill:rgb(181, 212, 244);font-size:14px;font-weight:500;">Arduino Leonardo</text>
+  <text x="500" y="86" text-anchor="middle" style="fill:rgb(55, 138, 221);font-size:12px;">ATmega32U4</text>
+</g>
+<g>
+  <rect x="400" y="104" width="200" height="52" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);stroke-width:0.5px;"/>
+  <text x="500" y="122" text-anchor="middle" style="fill:rgb(211, 209, 199);font-size:14px;font-weight:500;">State machine</text>
+  <text x="500" y="140" text-anchor="middle" style="fill:rgb(180, 178, 169);font-size:12px;">IDLE / RAMPING / STEADY / ERROR</text>
+</g>
+<g>
+  <rect x="400" y="172" width="200" height="52" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);stroke-width:0.5px;"/>
+  <text x="500" y="190" text-anchor="middle" style="fill:rgb(211, 209, 199);font-size:14px;font-weight:500;">PWM outputs</text>
+  <text x="500" y="206" text-anchor="middle" style="fill:rgb(180, 178, 169);font-size:12px;">Pins 9, 10, 11 — soft ramp</text>
+</g>
+<g>
+  <rect x="400" y="240" width="200" height="52" rx="8" stroke-width="0.5" style="fill:rgb(68, 68, 65);stroke:rgb(180, 178, 169);stroke-width:0.5px;"/>
+  <text x="500" y="258" text-anchor="middle" style="fill:rgb(211, 209, 199);font-size:14px;font-weight:500;">UART parser</text>
+  <text x="500" y="274" text-anchor="middle" style="fill:rgb(180, 178, 169);font-size:12px;">SET_* / SEQUENCE / STATUS</text>
+</g>
+<!-- Breadboard -->
+<g>
+  <rect x="220" y="400" width="200" height="56" rx="10" stroke-width="0.5" style="fill:rgb(58, 56, 50);stroke:rgb(136, 135, 128);stroke-width:0.5px;"/>
+  <text x="320" y="424" text-anchor="middle" style="fill:rgb(194, 192, 182);font-size:14px;font-weight:500;">Breadboard</text>
+  <text x="320" y="442" text-anchor="middle" style="fill:rgb(136, 135, 128);font-size:12px;">3 LEDs + 330Ω resistors</text>
+</g>
+<!-- LED Red1 -->
+<g>
+  <rect x="60" y="460" width="160" height="56" rx="8" stroke-width="0.5" style="fill:rgb(80, 19, 19);stroke:rgb(224, 75, 74);stroke-width:0.5px;"/>
+  <text x="140" y="478" text-anchor="middle" style="fill:rgb(247, 193, 193);font-size:14px;font-weight:500;">Red 1</text>
+  <text x="140" y="496" text-anchor="middle" style="fill:rgb(224, 75, 74);font-size:12px;">Pin 9 — PWM</text>
+</g>
+<!-- LED Red2 -->
+<g>
+  <rect x="240" y="460" width="160" height="56" rx="8" stroke-width="0.5" style="fill:rgb(80, 19, 19);stroke:rgb(224, 75, 74);stroke-width:0.5px;"/>
+  <text x="320" y="478" text-anchor="middle" style="fill:rgb(247, 193, 193);font-size:14px;font-weight:500;">Red 2</text>
+  <text x="320" y="496" text-anchor="middle" style="fill:rgb(224, 75, 74);font-size:12px;">Pin 10 — PWM</text>
+</g>
+<!-- LED Green -->
+<g>
+  <rect x="430" y="460" width="140" height="56" rx="8" stroke-width="0.5" style="fill:rgb(39, 80, 10);stroke:rgb(151, 196, 89);stroke-width:0.5px;"/>
+  <text x="500" y="478" text-anchor="middle" style="fill:rgb(192, 221, 151);font-size:14px;font-weight:500;">Green</text>
+  <text x="500" y="496" text-anchor="middle" style="fill:rgb(151, 196, 89);font-size:12px;">Pin 11 — PWM</text>
+</g>
+<!-- Arrows Arduino to Breadboard -->
+<line x1="480" y1="340" x2="480" y2="390" stroke="rgba(222,220,209,0.4)" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="480" y1="390" x2="500" y2="390" stroke="rgba(222,220,209,0.4)" stroke-width="1.5"/>
+<line x1="500" y1="390" x2="500" y2="460" stroke="rgba(222,220,209,0.4)" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="480" y1="390" x2="320" y2="390" stroke="rgba(222,220,209,0.4)" stroke-width="1.5"/>
+<line x1="320" y1="390" x2="320" y2="460" stroke="rgba(222,220,209,0.4)" stroke-width="1.5" marker-end="url(#arrow)" mask="url(#imagine-text-gaps-uf56d5)"/>
+<line x1="480" y1="390" x2="140" y2="390" stroke="rgba(222,220,209,0.4)" stroke-width="1.5"/>
+<line x1="140" y1="390" x2="140" y2="460" stroke="rgba(222,220,209,0.4)" stroke-width="1.5" marker-end="url(#arrow)"/>
+<!-- GND label -->
+<text x="160" y="354" text-anchor="middle" style="fill:rgb(194,192,182);font-size:12px;">GND</text>
+<line x1="160" y1="358" x2="160" y2="390" stroke="rgba(222,220,209,0.3)" stroke-width="1" stroke-dasharray="4 2" mask="url(#imagine-text-gaps-uf56d5)"/>
+<!-- Traffic light label -->
+<text x="638" y="194" text-anchor="middle" style="fill:rgb(194,192,182);font-size:12px;">Traffic</text>
+<text x="638" y="210" text-anchor="middle" style="fill:rgb(194,192,182);font-size:12px;">light</text>
+<text x="638" y="226" text-anchor="middle" style="fill:rgb(194,192,182);font-size:12px;">sequence</text>
+<line x1="582" y1="210" x2="626" y2="210" mask="url(#imagine-text-gaps-uf56d5)" style="fill:none;stroke:rgb(156,154,146);stroke-width:0.5px;stroke-dasharray:4px,3px;"/>
+</svg>
+    </div>
+</div>
+
+<!-- HIL TESTING -->
+<div class="project-section">
+    <h2>HIL testing and validation</h2>
+    <p>
+        The test suite covers command parsing, state transitions, PWM behavior, error handling,
+        and sequence mode. Each test sends a command over serial and asserts the response and
+        subsequent state — fully automated, no manual intervention.
+    </p>
+
+    <div class="spec-block" style="margin-bottom: 24px;">
+        <h3>What is tested</h3>
+        <ul class="spec-list">
+            <li>SET_RED1 / SET_RED2 / SET_GREEN with valid and out-of-range values</li>
+            <li>ACK on valid commands, NACK on invalid arguments</li>
+            <li>State transitions: IDLE → RAMPING → STEADY</li>
+            <li>Sequence start/stop and autonomous timing</li>
+            <li>STATUS response format and contents</li>
+            <li>SET_BRIGHTNESS global multiplier effect</li>
+        </ul>
+    </div>
+
+
+    <img src="../Images/carbon.png" alt="test-output">
+
+</div>
+
+<!-- DEMO VIDEO -->
+<div class="project-section">
+    <h2>Demo</h2>
+    <p>
+        A short walkthrough: sending commands from the Pi, watching the LEDs respond in real time,
+        starting sequence mode, and running the full test suite.
+    </p>
+    <!-- When ready, swap for: -->
+    <video controls muted style="width:100%; border-radius:14px; margin-top:24px;">
+        <source src="../Videos/DEMO_VID.mov" type="video/mp4">
+    </video>
+</div>
+
+<!-- HARDWARE PHOTOS -->
+<div class="project-section">
+    <h2>Hardware</h2>
+    <p>Arduino Leonardo with three LEDs and 330Ω resistors on a breadboard, connected via USB to a Raspberry Pi 3.</p>
+    <div class="img-grid-2">
+        <div>
+            <img src="../Images/IMG_0309.png" alt="hardwaresetup">
+        </div>
+        <div>
+            <img src="../Images/IMG_0312.png" alt="ledstates">
+        </div>
+    </div>
+</div>
+
+<!-- ENGINEERING INSIGHTS -->
+<div class="project-section">
+    <h2>Engineering insights</h2>
+    <p>
+        Designing the UART protocol first — before writing any test code — made the system much more
+        testable. Having explicit ACK/NACK responses meant the test suite could be purely black-box:
+        no internal state inspection needed.
+    </p>
+    <p>
+        Using millis() instead of delay() in firmware was essential. It kept the UART parser responsive
+        during ramp transitions, which is a common pitfall in embedded projects.
+    </p>
+    <p>
+        This project mirrors real-world HIL workflows used in automotive ECU development, where an
+        embedded controller is validated by an external test system before any deployment to hardware.
+    </p>
+</div>
+
+<!-- LINKS -->
+<div class="project-section">
+    <h2>Links</h2>
+    <div class="project-links">
+        <a href="https://github.com/Noelekbrand/leonardo-pwm-ctrl" target="_blank" class="btn-primary">
+            View on GitHub
+        </a>
+        <a href="../index.html" class="btn-secondary">
+            ← Back to portfolio
+        </a>
+    </div>
+</div>
+
+<footer>
+    © 2026 Noel Ekbrand — Robotics & Automation Engineer
+</footer>
+
+</body>
+</html>
